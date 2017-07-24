@@ -11551,10 +11551,10 @@ var AddTodo = function AddTodo(_ref) {
 
     return _react2.default.createElement(
         'div',
-        null,
+        { className: 'todo-add' },
         _react2.default.createElement(
             'form',
-            {
+            { className: 'todo-add__form',
                 onSubmit: function onSubmit(e) {
                     e.preventDefault();
                     if (!input.value.trim()) {
@@ -11564,15 +11564,17 @@ var AddTodo = function AddTodo(_ref) {
                     input.value = '';
                 }
             },
-            _react2.default.createElement('input', {
+            _react2.default.createElement('input', { className: 'todo-add__input',
                 ref: function ref(node) {
                     input = node;
                 }
             }),
+            _react2.default.createElement('div', { className: 'todo-add__input-line' }),
             _react2.default.createElement(
                 'button',
-                { type: 'submit' },
-                'Add Todo'
+                { type: 'submit',
+                    className: 'todo-add__button' },
+                '+'
             )
         )
     );
