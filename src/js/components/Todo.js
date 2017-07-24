@@ -1,14 +1,12 @@
 import React from 'react'
 
 const Todo = ({ onClick, completed, text }) => (
-    <li
+    <div
         onClick={onClick}
-        style={{
-            textDecoration: completed ? 'line-through' : 'none'
-        }}
+        className={ completed ? 'todo-card--completed todo-card' : 'todo-card' }
     >
         {text}
-    </li>
+    </div>
 )
 
 export default Todo

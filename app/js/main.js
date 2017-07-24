@@ -4751,7 +4751,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var nextTodoId = 0;
+var nextTodoId = 3;
 
 var addTodo = exports.addTodo = function addTodo(text) {
     return {
@@ -11473,12 +11473,10 @@ var Todo = function Todo(_ref) {
         completed = _ref.completed,
         text = _ref.text;
     return _react2.default.createElement(
-        'li',
+        'div',
         {
             onClick: onClick,
-            style: {
-                textDecoration: completed ? 'line-through' : 'none'
-            }
+            className: completed ? 'todo-card--completed todo-card' : 'todo-card'
         },
         text
     );
@@ -11513,8 +11511,8 @@ var TodoList = function TodoList(_ref) {
     var todos = _ref.todos,
         onTodoClick = _ref.onTodoClick;
     return _react2.default.createElement(
-        'ul',
-        null,
+        'div',
+        { className: 'todos' },
         todos.map(function (todo) {
             return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo, { onClick: function onClick() {
                     return onTodoClick(todo.id);
@@ -11732,8 +11730,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var initialState = [{
+    id: 0,
+    text: 'Buy flowers for wife',
+    completed: false
+}, {
+    id: 1,
+    text: 'Kick your ass',
+    completed: true
+}, {
+    id: 2,
+    text: 'To be awesome',
+    completed: true
+}];
+
 var todos = function todos() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
     var action = arguments[1];
 
     switch (action.type) {

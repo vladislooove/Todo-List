@@ -1,4 +1,20 @@
-const todos = (state = [], action) => {
+const initialState = [
+    {
+        id: 0,
+        text: 'Buy flowers for wife',
+        completed: false
+    },{
+        id: 1,
+        text: 'Kick your ass',
+        completed: true
+    },{
+        id: 2,
+        text: 'To be awesome',
+        completed: true
+    }
+]
+
+const todos = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
