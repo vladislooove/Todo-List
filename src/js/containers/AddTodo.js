@@ -18,6 +18,7 @@ let AddTodo = ({ dispatch }) => {
                 }}
             >
                 <input className="todo-add__input"
+                       placeholder="Please, enter text"
                        ref={node => {
                         input = node
                     }}

@@ -77,6 +77,8 @@ body {
   text-transform: uppercase;
   font-size: 0.6875rem;
   background-color: #d50000;
+  -webkit-animation: todo-completed 300ms;
+          animation: todo-completed 300ms;
 }
 .todo-card--completed::after {
   content: '';
@@ -87,6 +89,8 @@ body {
   border-right: 0.25rem solid #730000;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+  -webkit-animation: todo-completed 300ms;
+          animation: todo-completed 300ms;
 }
 @-webkit-keyframes card-created {
   0% {
@@ -129,6 +133,22 @@ body {
   }
   100% {
     left: 0;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes todo-completed {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes todo-completed {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 }

@@ -11565,6 +11565,7 @@ var AddTodo = function AddTodo(_ref) {
                 }
             },
             _react2.default.createElement('input', { className: 'todo-add__input',
+                placeholder: 'Please, enter text',
                 ref: function ref(node) {
                     input = node;
                 }
