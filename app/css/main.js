@@ -4751,7 +4751,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var nextTodoId = 0;
+var nextTodoId = 3;
 
 var addTodo = exports.addTodo = function addTodo(text) {
     return {
@@ -11474,11 +11474,22 @@ var Todo = function Todo(_ref) {
         text = _ref.text;
     return _react2.default.createElement(
         'div',
-        {
-            onClick: onClick,
-            className: completed ? 'todo-card--completed todo-card' : 'todo-card'
-        },
-        text
+        { className: completed ? 'todo-card--completed todo-card' : 'todo-card' },
+        text,
+        _react2.default.createElement(
+            'div',
+            { className: 'todo-card__actions' },
+            _react2.default.createElement(
+                'div',
+                { className: 'todo-card__action todo-card__action--check',
+                    onClick: onClick },
+                _react2.default.createElement(
+                    'svg',
+                    { className: completed ? "icon--star-filled" : "icon--star" },
+                    _react2.default.createElement('use', { href: completed ? "/images/svg-symbols.svg#star-filled" : "/images/svg-symbols.svg#star" })
+                )
+            )
+        )
     );
 };
 
@@ -11509,7 +11520,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TodoList = function TodoList(_ref) {
     var todos = _ref.todos,
-        onTodoClick = _ref.onTodoClick;
+        onTodoClick = _ref.onTodoClick,
+        onClickDelete = _ref.onClickDelete;
     return _react2.default.createElement(
         'div',
         { className: 'todos' },
@@ -11551,10 +11563,10 @@ var AddTodo = function AddTodo(_ref) {
 
     return _react2.default.createElement(
         'div',
-        null,
+        { className: 'todo-add' },
         _react2.default.createElement(
             'form',
-            {
+            { className: 'todo-add__form',
                 onSubmit: function onSubmit(e) {
                     e.preventDefault();
                     if (!input.value.trim()) {
@@ -11564,15 +11576,18 @@ var AddTodo = function AddTodo(_ref) {
                     input.value = '';
                 }
             },
-            _react2.default.createElement('input', {
+            _react2.default.createElement('input', { className: 'todo-add__input',
+                placeholder: 'Please, enter text',
                 ref: function ref(node) {
                     input = node;
                 }
             }),
+            _react2.default.createElement('div', { className: 'todo-add__input-line' }),
             _react2.default.createElement(
                 'button',
-                { type: 'submit' },
-                'Add Todo'
+                { type: 'submit',
+                    className: 'todo-add__button' },
+                '+'
             )
         )
     );
@@ -11730,8 +11745,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var initialState = [{
+    id: 0,
+    text: 'Buy flowers for wife',
+    completed: false
+}, {
+    id: 1,
+    text: 'Kick your ass',
+    completed: true
+}, {
+    id: 2,
+    text: 'To be awesome',
+    completed: true
+}];
+
 var todos = function todos() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
     var action = arguments[1];
 
     switch (action.type) {
