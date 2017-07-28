@@ -11387,26 +11387,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Footer = function Footer() {
     return _react2.default.createElement(
-        'p',
-        null,
-        'Show:',
-        ' ',
+        'footer',
+        { className: 'footer' },
         _react2.default.createElement(
-            _FilterLink2.default,
-            { filter: 'SHOW_ALL' },
-            'All'
+            'div',
+            { className: 'footer__title' },
+            'Show:'
         ),
-        ', ',
         _react2.default.createElement(
-            _FilterLink2.default,
-            { filter: 'SHOW_ACTIVE' },
-            'Active'
-        ),
-        ', ',
-        _react2.default.createElement(
-            _FilterLink2.default,
-            { filter: 'SHOW_COMPLETED' },
-            'Completed'
+            'ul',
+            { className: 'filter' },
+            _react2.default.createElement(
+                _FilterLink2.default,
+                { filter: 'SHOW_ALL' },
+                'All'
+            ),
+            _react2.default.createElement(
+                _FilterLink2.default,
+                { filter: 'SHOW_ACTIVE' },
+                'Active'
+            ),
+            _react2.default.createElement(
+                _FilterLink2.default,
+                { filter: 'SHOW_COMPLETED' },
+                'Completed'
+            )
         )
     );
 };
@@ -11437,22 +11442,31 @@ var Link = function Link(_ref) {
 
     if (active) {
         return _react2.default.createElement(
-            "span",
+            "li",
             null,
-            children
+            _react2.default.createElement(
+                "span",
+                { className: "filter__item filter__item--active" },
+                children
+            )
         );
     }
 
     return _react2.default.createElement(
-        "a",
-        {
-            href: "#",
-            onClick: function onClick(e) {
-                e.preventDefault();
-                _onClick();
-            }
-        },
-        children
+        "li",
+        null,
+        _react2.default.createElement(
+            "a",
+            {
+                href: "#",
+                className: "filter__item",
+                onClick: function onClick(e) {
+                    e.preventDefault();
+                    _onClick();
+                }
+            },
+            children
+        )
     );
 };
 

@@ -4775,6 +4775,13 @@ var toggleTodo = exports.toggleTodo = function toggleTodo(id) {
     };
 };
 
+var deleteTodo = exports.deleteTodo = function deleteTodo(id) {
+    return {
+        type: 'DELETE_TODO',
+        id: id
+    };
+};
+
 /***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -11469,7 +11476,8 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Todo = function Todo(_ref) {
-    var onClick = _ref.onClick,
+    var onClickCheck = _ref.onClickCheck,
+        onClickDelete = _ref.onClickDelete,
         completed = _ref.completed,
         text = _ref.text;
     return _react2.default.createElement(
@@ -11479,15 +11487,13 @@ var Todo = function Todo(_ref) {
         _react2.default.createElement(
             'div',
             { className: 'todo-card__actions' },
+            _react2.default.createElement('div', { className: completed ? "todo-card__check todo-card__check--checked" : "todo-card__check",
+                onClick: onClickCheck }),
             _react2.default.createElement(
                 'div',
-                { className: 'todo-card__action todo-card__action--check',
-                    onClick: onClick },
-                _react2.default.createElement(
-                    'svg',
-                    { className: completed ? "icon--star-filled" : "icon--star" },
-                    _react2.default.createElement('use', { href: completed ? "/images/svg-symbols.svg#star-filled" : "/images/svg-symbols.svg#star" })
-                )
+                { className: 'todo-card__delete',
+                    onClick: onClickDelete },
+                '\u2717'
             )
         )
     );
@@ -11520,14 +11526,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TodoList = function TodoList(_ref) {
     var todos = _ref.todos,
-        onTodoClick = _ref.onTodoClick,
-        onClickDelete = _ref.onClickDelete;
+        _onClickCheck = _ref.onClickCheck,
+        _onClickDelete = _ref.onClickDelete;
     return _react2.default.createElement(
         'div',
         { className: 'todos' },
         todos.map(function (todo) {
-            return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo, { onClick: function onClick() {
-                    return onTodoClick(todo.id);
+            return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo, { onClickCheck: function onClickCheck() {
+                    return _onClickCheck(todo.id);
+                }, onClickDelete: function onClickDelete() {
+                    return _onClickDelete(todo.id);
                 } }));
         })
     );
@@ -11679,8 +11687,11 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        onTodoClick: function onTodoClick(id) {
+        onClickCheck: function onClickCheck(id) {
             dispatch((0, _actions.toggleTodo)(id));
+        },
+        onClickDelete: function onClickDelete(id) {
+            dispatch((0, _actions.deleteTodo)(id));
         }
     };
 };
@@ -11774,6 +11785,11 @@ var todos = function todos() {
             return state.map(function (todo) {
                 return todo.id === action.id ? _extends({}, todo, { completed: !todo.completed }) : todo;
             });
+        case 'DELETE_TODO':
+            return state.filter(function (todo) {
+                return todo.id != action.id;
+            });
+
         default:
             return state;
     }

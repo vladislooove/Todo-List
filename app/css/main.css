@@ -241,3 +241,19 @@ body {
 .todo-add__button:focus {
   color: #004d40;
 }
+.footer {
+  padding: 0.9375rem;
+}
+.filter {
+  list-style: none;
+  padding: 0;
+}
+.filter__item {
+  display: inline-block;
+  padding: 0.125rem;
+  text-decoration: none;
+  color: #009688;
+}
+.filter__item--active {
+  color: #004d40;
+}
